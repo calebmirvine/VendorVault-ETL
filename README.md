@@ -7,7 +7,7 @@ This utility bridges the gap between external vendor APIs and internal business 
 ## 📉 Business Impact & Value
 
 * **90% Reduction in Overhead:** Reduced daily administrative checks from hours to minutes.
-* **Scalability:**Capable of auditing hundreds of SKUs simultaneously without additional labor.
+* **Scalability:** Capable of auditing hundreds of SKUs simultaneously without additional labor.
 * **Cost Avoidance:** Identifies price fluctuations and stock volatility in real-time, preventing purchasing errors and overpayment.
 
 ## 🔄 Logistics & Workflow Utilization
