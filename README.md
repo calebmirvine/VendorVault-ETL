@@ -1,35 +1,50 @@
-# Vendor Procurement Automation Utility
+# Supply Chain & Procurement Automation
 
-**An automated ETL (Extract, Transform, Load) pipeline designed to modernize supply chain monitoring.**
+**A professional automation solution built to modernize vendor data retrieval and drive business intelligence.**
 
-This utility bridges the gap between external vendor APIs and internal business intelligence tools. By automating the retrieval of real-time pricing and inventory data, it eliminates manual data entry, allowing procurement teams to focus on analysis rather than collection.
+---
 
-## 📉 Business Impact & Value
+## The Problem & The Solution
 
-* **90% Reduction in Overhead:** Reduced daily administrative checks from hours to minutes.
-* **Scalability:** Capable of auditing hundreds of SKUs simultaneously without additional labor.
-* **Cost Avoidance:** Identifies price fluctuations and stock volatility in real-time, preventing purchasing errors and overpayment.
+In my current role, maintaining accurate pricing and inventory data for hundreds of SKUs was a manual, time-consuming process. Checking vendor portals individually was slow and prone to human error.
 
-## 🔄 Logistics & Workflow Utilization
+I developed this **Asynchronous Python ETL Suite** to automate this workflow. It transforms a labor-intensive administrative task into a streamlined data pipeline, allowing our procurement team to focus on strategic analysis rather than data entry.
 
-This script acts as the data engine for a larger automated ecosystem:
+## Business Impact & Value
 
-1.  **Extraction (Python):** Script authenticates via OAuth2 and pulls live data from the vendor's API based on a target CSV list.
-2.  **Automation (Power Automate):** The generated report is detected by Microsoft Power Automate Desktop.
-3.  **Integration (SharePoint):** Data is parsed and appended to a master Excel dataset on SharePoint.
-4.  **Analysis (Excel):** Procurement managers utilize **Pivot Tables** connected to this master data to visualize trends and forecast inventory needs.
+*   **Efficiency:** Reduced data collection time from hours of manual work to less than 60 seconds of automated processing.
+*   **Cost Avoidance:** Enabled real-time tracking of price fluctuations, preventing overpayment on volatile SKUs.
+*   **Business Intelligence:** Feeds a master analysis suite where **Pivot Tables** track month-over-month trends, helping the business make data-driven procurement decisions.
 
-## 🛠️ Technical Stack
+## The Workflow
 
-* **Language:** Python 3.10+
-* **Libraries:** `pandas` (Data aggregation), `requests` (Authenticated API calls), `python-dotenv` (Security).
-* **Security:** Credentials managed via environment variables; endpoints obfuscated for privacy.
+```mermaid
+graph TD
+    A[products.txt] --> B(Python ETL Script)
+    B --> C[.env Configuration]
+    B --> D[export.csv]
+    D --> E{Power Automate Desktop}
+    E --> F[SharePoint Excel Master]
+    F --> G[Pivot Table Analysis]
+    G --> H[Quarterly Strategy]
+```
 
-## ⚙️ Quick Setup
+1.  **Extract:** Python script uses `asyncio` to pull live data from vendor APIs.
+2.  **Automate:** Power Automate Desktop triggers on script completion to import the new data.
+3.  **Analyze:** The data is appended to a master Excel dataset where I use Pivot Tables to compare historical pricing and inventory levels.
 
-1.  **Install Dependencies:** `pip install pandas requests python-dotenv`
-2.  **Configure Env:** Create `.env` with `VENDOR_API_TOKEN`, `USERNAME`, and `PASSWORD`.
-3.  **Load Data:** Place target URLs in `./data/input_product_list.csv`.
-4.  **Run:** Execute `python3 main.py` to generate the report.
+## Technical Skills Demonstrated
 
-> **Note:** Specific vendor endpoints and credentials in this repository have been obfuscated.
+*   **Asynchronous API Integration:** Used `httpx` and `asyncio` to handle concurrent requests, maximizing throughput while respecting API limits with semi-phores.
+*   **Production-Ready Security:** Implemented `python-dotenv` for credential management. The script is fully anonymized—all proprietary endpoints and brand mentions are managed via local environment variables.
+*   **Cross-Platform Portability:** Engineered robust path handling (using `sys.executable` checks) to ensure the script runs reliably as a standalone binary on Windows, macOS, and Linux.
+*   **Data Integrity:** Utilized `pandas` for deduplication and transformation, ensuring clean data for downstream BI tools.
+
+## ⚙️ How to Use (Generic Setup)
+
+1.  **Install:** `pip install pandas httpx python-dotenv`
+2.  **Configure:** Setup a `.env` file with your `REMOTE_BASE_URL` and API credentials (see `.env.example`).
+3.  **Run:** Execute `python v2csv.py` to generate the `export.csv` report.
+
+---
+> **Note:** To protect company privacy and comply with data security standards, all proprietary vendor branding and endpoints have been moved to environment variables. 
